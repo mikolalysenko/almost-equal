@@ -21,6 +21,11 @@ console.log(almostEqual(a, b, almostEqual.FLT_EPSILON, almostEqual.FLT_EPSILON))
 
 //Check if a == b up to double precision
 console.log(almostEqual(a, b, almostEqual.DBL_EPSILON, almostEqual.DBL_EPSILON))
+
+//Precision tolerances can be conveniently curried
+var dblAlmostEq = almostEqual.curry(almostEqual.DBL_EPSILON, almostEqual.DBL_EPSILON)
+
+console.log(dblAlmostEqual(a, b))
 ```
 
 ### `almostEqual(a, b, absoluteTolerance, relativeTolerance)`
@@ -33,6 +38,10 @@ Checks if two floats are within the given tolerances of one another using the fo
 * `relativeTolerance` is a tolerance that scales with a/b (set to 0 to ignore)
 
 **Returns** `true` if `a` and `b` are approximately equal
+
+### `almostEqual.curry(absoluteTolerance, relativeTolerance)`
+Returns a curried version of `almostEqual(...)` with fixed values for the tolerance parameters.
+The returned function has a signature of `curriedAlmostEqual(a, b)`
 
 ### `almostEqual.FLT_EPSILON`
 Floating point (32-bit) epsilon
